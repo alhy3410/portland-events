@@ -1,0 +1,40 @@
+<% if current_user %>
+  <% if current_user.admin %>
+    <div class="All-Messages">
+      <div class="Messages-List">
+        <h1>List of All Messages</h1>
+        <% if @messages.any? %>
+          <div class="row">
+
+          <h3>Message Log : </h3>
+          <hr>
+          <div class="current-month-event">
+            <div class="col-md-2"><p class="text-center">To</p></div>
+            <div class="col-md-2"><p class="text-center">From</p></div>
+            <div class="col-md-8"><p class="text-center">Message</p></div>
+
+          </div>
+          <hr>
+          <% @messages.each do |message| %>
+              <div class="current-month-event">
+                <div class="col-md-2"><p class="text-center"><%= message.to %></p></div>
+                <div class="col-md-2"><p class="text-center"><%= message.from %></p></div>
+                <div class="col-md-8"><p class="text-center"><%= message.body %></p></div>
+              </div>
+              <hr>
+          <% end %>
+          <hr>
+          <br>
+        </div>
+        <% else %>
+        <p>There are no messages at the moment.</p>
+        <% end %>
+      </div>
+      <hr>
+      <hr>
+      <div class="All-Links">
+          <%= link_to "Send a Message", new_message_path %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

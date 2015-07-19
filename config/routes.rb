@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :events
   resources :users
   resources :contacts
+  resources :messages
 
 end
