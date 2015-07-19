@@ -1,0 +1,18 @@
+<%= form_for [@event] do |f| %>
+<%= f.label :eventname, "Event Name: " %>
+<%= f.text_field :eventname, :size => 10 %>
+<br><br>
+<%= f.label :eventperson, "Your Name: " %>
+<%= f.text_field :eventperson %>
+<br><br>
+<%= f.label :eventdate, "Event Date (Year-Date-Month): " %>
+<%= f.date_field :eventdate, :size => 20 %>
+<br><br>
+<%= f.label :eventlocation, "Event Location: " %>
+<%= f.text_field :eventlocation %>
+<br><br>
+<%= f.label :eventinfo, "Event Info: " %> <br>
+<%= f.text_area :eventinfo, :cols => "80", :rows => "10" %>
+<br><br>
+<%= f.submit %>
+<% end %>

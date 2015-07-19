@@ -1,0 +1,20 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: portland-events_development
+
+test:
+  <<: *default
+  database: portland-events_test
+
+production:
+  <<: *default
+  database: portland-events_production
+  username: portland-events
+  password: <%= ENV['WOULD-YOU-RATHER_DATABASE_PASSWORD'] %>

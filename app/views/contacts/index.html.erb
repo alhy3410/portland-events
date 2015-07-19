@@ -1,0 +1,49 @@
+<% if current_user %>
+  <% if current_user.admin %>
+    <div class="All-Contact">
+      <div class="Contact-List">
+        <h1>List of All Contacts</h1>
+        <% if @contacts.any? %>
+          <div class="row">
+
+          <hr>
+          <div class="current-month-event">
+            <div class="col-md-3"><p class="text-center">Name</p></div>
+            <div class="col-md-3"><p class="text-center">Phone Number</p></div>
+            <div class="col-md-3"><p class="text-center">Edit Contact</p></div>
+            <div class="col-md-3"><p class="text-center">Delete Contact</p></div>
+
+          </div>
+          <hr>
+          <% @contacts.each do |contact| %>
+              <div class="person-contact">
+                <div class="col-md-3"><p class="text-center"><%= contact.name %></p></div>
+                <div class="col-md-3"><p class="text-center"><%= contact.number %></p></div>
+                <div class="col-md-3"><p class="text-center"><%= link_to "Edit", edit_contact_path(contact) %></p></div>
+                <div class="col-md-3"><p class="text-center"> <%= link_to "Delete", contact_path(contact),
+                  :data => {:confirm => "Are you sure you want to delete this contact?",
+                    :method => "delete"} %></p></div>
+              </div>
+              <hr>
+          <% end %>
+          <hr>
+          <br>
+        </div>
+        <% else %>
+        <p>There are no contacts at the moment.</p>
+        <% end %>
+      </div>
+      <hr>
+      <hr>
+      <div class="All-Links">
+          <%= link_to "Add an contact", new_contact_path %>
+      </div>
+    </div>
+    <% end %>
+  <% else %>
+  <p>
+    You don't have permission to view this page. Please log in as an admin in order to access this information.
+  </p>
+
+
+<% end %>

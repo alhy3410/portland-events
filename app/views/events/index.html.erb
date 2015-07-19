@@ -1,0 +1,69 @@
+<div class="All-Events">
+  <div class="Events-List">
+    <h1>List of All Events</h1>
+    <% if @events.any? %>
+      <% currentTime = Time.new %>
+      <div class="row">
+
+      <h3>Events this month <span class="datedetail"> - (Year, Month, Day)</span>: </h3>
+      <hr>
+      <div class="current-month-event">
+        <div class="col-md-1"><p class="text-center">Month</p></div>
+        <div class="col-md-1"><p class="text-center">Day</p></div>
+        <div class="col-md-1"><p class="text-center">Year</p></div>
+        <div class="col-md-2"><p class="text-center">Contact</p></div>
+        <div class="col-md-7"><p class="text-center">Event Name</p></div>
+      </div>
+      <hr>
+      <% @events.each do |event| %>
+        <% if event.eventdate.mon == currentTime.mon %>
+          <div class="current-month-event">
+            <div class="col-md-1"><p class="text-center"><%= event.eventdate.mon %></p></div>
+            <div class="col-md-1"><p class="text-center"><%= event.eventdate.day %></p></div>
+            <div class="col-md-1"><p class="text-center"><%= event.eventdate.year %></p></div>
+            <div class="col-md-2"><p class="text-center"><%= event.eventperson %></p></div>
+            <div class="col-md-7"><p class="text-center"><%= link_to event.eventname, event_path(event) %></p></div>
+          </div>
+          <hr>
+        <% end %>
+      <% end %>
+      <hr>
+      <br>
+      <hr>
+      <h3>Future Events <span class="datedetail"> - (Year, Month, Day)</span>: </h3>
+      <hr>
+      <div class="current-month-event">
+        <div class="col-md-1"><p class="text-center">Month</p></div>
+        <div class="col-md-1"><p class="text-center">Day</p></div>
+        <div class="col-md-1"><p class="text-center">Year</p></div>
+        <div class="col-md-2"><p class="text-center">Contact</p></div>
+        <div class="col-md-7"><p class="text-center">Event Name</p></div>
+      </div>
+      <hr>
+      <% @events.each do |event| %>
+        <% if currentTime.strftime("%Y-%d-%m") < event.eventdate.strftime("%Y-%d-%m") %>
+          <div class="other-month-event">
+            <div class="col-md-1"><p class="text-center"><%= event.eventdate.mon %></p></div>
+            <div class="col-md-1"><p class="text-center"><%= event.eventdate.day %></p></div>
+            <div class="col-md-1"><p class="text-center"><%= event.eventdate.year %></p></div>
+            <div class="col-md-2"><p class="text-center"><%= event.eventperson %></p></div>
+            <div class="col-md-7"><p class="text-center"><%= link_to event.eventname, event_path(event) %></p></div>
+          </div>
+          <hr>
+        <% else %>
+            <% event.destroy %>
+        <% end %>
+      <% end %>
+
+
+    </div>
+    <% else %>
+    <p>There are no events at the moment.</p>
+    <% end %>
+  </div>
+  <hr>
+  <hr>
+  <div class="All-Links">
+      <%= link_to "Add an Event", new_event_path %>
+  </div>
+</div>
