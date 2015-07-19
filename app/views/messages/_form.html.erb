@@ -1,9 +1,6 @@
 <%= form_for [@message] do |f| %>
-<%= f.label :to, "Phone Number To Send To: " %>
-<%= f.text_field :to, :size => 10 %>
-<br><br>
-<%= f.label :from, "From: " %>
-<%= f.text_field :from %>
+<%= f.label :to %>
+<%= f.text_field :to %>
 <br><br>
 <%= f.label :body, "Message: " %>
 <%= f.text_field :body, :size => 20 %>

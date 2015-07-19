@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150719203626) do
 
   create_table "messages", force: :cascade do |t|
     t.string   "to"
-    t.string   "from"
+    t.string   "from",       default: "3602076061"
     t.string   "body"
     t.datetime "created_at"
     t.datetime "updated_at"

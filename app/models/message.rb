@@ -1,5 +1,9 @@
 class Message < ActiveRecord::Base
   before_create :send_message
+  validates_format_of :to,
+                    :with => /\A[0-9]{10}\Z/,
+                    :allow_blank => false,
+                    :allow_nil => false
 
   private
 
