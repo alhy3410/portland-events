@@ -8,12 +8,15 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(message_params)
-    if @message.save
-      redirect_to messages_path
-    else
-      redirect_to :back
+
+    @contacts = Contact.all
+    from = ENV['FROM_PHONE_NUMBER']
+    @contacts.each do |contact|
+      msg = Message.new(to: contact.number, from: from, body: params[:body])
+      msg.save
     end
+    redirect_to messages_path
+
   end
 
   def destroy
