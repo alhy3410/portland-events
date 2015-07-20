@@ -5,7 +5,7 @@
       <% currentTime = Time.new %>
       <div class="row">
 
-      <h3>Events this month <span class="datedetail"> - (Year, Month, Day)</span>: </h3>
+      <h3>Events this month</h3>
       <hr>
       <div class="current-month-event">
         <div class="col-md-1"><p class="text-center">Month</p></div>
@@ -30,7 +30,7 @@
       <hr>
       <br>
       <hr>
-      <h3>Future Events <span class="datedetail"> - (Year, Month, Day)</span>: </h3>
+      <h3>Future Events</h3>
       <hr>
       <div class="current-month-event">
         <div class="col-md-1"><p class="text-center">Month</p></div>
@@ -41,7 +41,7 @@
       </div>
       <hr>
       <% @events.each do |event| %>
-        <% if currentTime.strftime("%Y-%d-%m") < event.eventdate.strftime("%Y-%d-%m") %>
+        <% if currentTime.strftime("%Y-%m") < event.eventdate.strftime("%Y-%m") %>
           <div class="other-month-event">
             <div class="col-md-1"><p class="text-center"><%= event.eventdate.mon %></p></div>
             <div class="col-md-1"><p class="text-center"><%= event.eventdate.day %></p></div>
@@ -50,8 +50,6 @@
             <div class="col-md-7"><p class="text-center"><%= link_to event.eventname, event_path(event) %></p></div>
           </div>
           <hr>
-        <% else %>
-            <% event.destroy %>
         <% end %>
       <% end %>
 

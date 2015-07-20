@@ -5,7 +5,6 @@ class MessagesController < ApplicationController
 
   def new
     @contacts = Contact.all
-
     @message = Message.new
   end
 
