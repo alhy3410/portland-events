@@ -1,7 +1,7 @@
 <%= form_for [@message] do |f| %>
 <br><br>
 <%= f.label :body, "Message: " %>
-<%= text_field_tag :body, :size => 20 %>
+<%= text_field_tag :body %>
 <br><br>
 <%= f.submit %>
 <% end %>
