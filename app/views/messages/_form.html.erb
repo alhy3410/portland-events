@@ -1,7 +1,7 @@
-<%= form_for [@message] do |f| %>
+<%= form_tag messages_path %>
+<%= collection_check_boxes(:contact, :selecttosend, Contact.all, :id, :name ) %>
 <br><br>
-<%= f.label :body, "Message: " %>
+<%= label_tag :body, "Message: " %>
 <%= text_field_tag :body %>
 <br><br>
-<%= f.submit %>
-<% end %>
+<%= submit_tag %>

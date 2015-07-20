@@ -4,19 +4,27 @@ class MessagesController < ApplicationController
   end
 
   def new
+    @contacts = Contact.all
+
     @message = Message.new
   end
 
   def create
-
-    @contacts = Contact.all
     from = ENV['FROM_PHONE_NUMBER']
-    @contacts.each do |contact|
-      msg = Message.new(to: contact.number, from: from, body: params[:body], contact_id: contact.id)
-      msg.save
+    params[:contact][:selecttosend].pop
+    if params[:contact][:selecttosend].any?
+      params[:contact][:selecttosend].each do |id|
+          msg = Message.new(to: Contact.find(id.to_i).number, from: from, body: params[:body], contact_id: id.to_i)
+          msg.save
+      end
+    else
+      @contacts = Contact.all
+      @contacts.each do |contact|
+        msg = Message.new(to: contact.number, from: from, body: params[:body], contact_id: contact.id)
+        msg.save
+      end
     end
-    redirect_to messages_path
-
+      redirect_to messages_path
   end
 
   def destroy
