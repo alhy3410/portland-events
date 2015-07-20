@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
     @contacts = Contact.all
     from = ENV['FROM_PHONE_NUMBER']
     @contacts.each do |contact|
-      msg = Message.new(to: contact.number, from: from, body: params[:body])
+      msg = Message.new(to: contact.number, from: from, body: params[:body], contact_id: contact.id)
       msg.save
     end
     redirect_to messages_path
@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:to, :from, :body)
+    params.require(:message).permit(:to, :from, :body, :contact_id)
   end
 
 end
