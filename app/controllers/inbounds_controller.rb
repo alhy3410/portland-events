@@ -6,7 +6,7 @@ class InboundsController < ApplicationController
     @messagebody = params["Body"]
 
     @messagereturnbody = []
-    eventwording = ["event", "Event", "EVENT","e","evnt","evet"]
+    eventwording = ["event", "Event", "EVENT","e","evnt","evet", "E"]
     if eventwording.include? @messagebody
       @events.each do |event|
         if event.eventdate.strftime("%Y-%m-%d") == @currentTime.strftime("%Y-%m-%d")
