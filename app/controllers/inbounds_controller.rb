@@ -3,24 +3,19 @@ class InboundsController < ApplicationController
   def create
     @currentTime = Time.new
     @events = Event.all
-
     @messagebody = params["Body"]
+
     @messagereturnbody = []
-    if @messagebody == "event"
+    if @messagebody.downcase == "event"
       @events.each do |event|
         if event.eventdate.strftime("%Y-%m-%d") == @currentTime.strftime("%Y-%m-%d")
           @messagereturnbody.push(event.eventname)
         end
       end
     else
-      @messagereturnbody = "What do you want?"
+      @messagereturnbody = "Nothing to see here."
     end
-
-    @messagereturnbody.join(",")
-    @numbertoreply = params["From"]
-    @from_number = ENV['FROM_PHONE_NUMBER']
-    msg = Message.new(to: @numbertoreply, from: @from_number.to_i, body: @messagereturnbody, contact_id: 0)
-    binding.pry
-    msg.save
+    @results = @messagereturnbody.join(",")
+    render 'create.xml.erb', content_type: 'text/xml'
   end
 end

@@ -7,3 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create(email: "admintest@admin.com", password: "admin", admin: true)
+Contact.create(name: "Admin", number: ENV["FROM_PHONE_NUMBER"], selecttosend: false)

@@ -16,7 +16,7 @@
       </div>
       <hr>
       <% @events.each do |event| %>
-        <% if event.eventdate.mon == currentTime.mon %>
+        <% if event.eventdate.mon == currentTime.mon && event.eventdate.day >= currentTime.day %>
           <div class="current-month-event">
             <div class="col-md-1"><p class="text-center"><%= event.eventdate.mon %></p></div>
             <div class="col-md-1"><p class="text-center"><%= event.eventdate.day %></p></div>
