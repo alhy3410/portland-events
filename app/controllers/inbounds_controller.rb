@@ -6,16 +6,19 @@ class InboundsController < ApplicationController
     @messagebody = params["Body"]
 
     @messagereturnbody = []
-    if @messagebody.downcase == "event"
+    eventwording = ["event", "Event", "EVENT","e","evnt","evet"]
+    if eventwording.include? @messagebody
       @events.each do |event|
         if event.eventdate.strftime("%Y-%m-%d") == @currentTime.strftime("%Y-%m-%d")
           @messagereturnbody.push(event.eventname)
         end
       end
+      @results = @messagereturnbody.join(". ")
+      render 'event.xml.erb', content_type: 'text/xml'
     else
-      @messagereturnbody = "Nothing to see here."
+      render 'otherresponse.xml.erb', content_type: 'text/xml'
     end
-    @results = @messagereturnbody.join(",")
-    render 'create.xml.erb', content_type: 'text/xml'
+
+
   end
 end
